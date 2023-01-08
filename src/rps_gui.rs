@@ -29,7 +29,7 @@ impl App {
             let hands = hands.clone();
             threads.push(thread::spawn(move || {
                 let mut hands = hands.lock().unwrap();
-                let hand = rand::random::<u8>() % 5;
+                let hand = rand::random::<u8>() % 3;
                 hands[i] = hand;
             }));
         }
@@ -42,15 +42,8 @@ impl App {
         let result = if hand1 == hand2 {
             "Tie!".into()
         } else if (hand1 == 0 && hand2 == 2) ||
-                  (hand1 == 0 && hand2 == 4) ||
                   (hand1 == 1 && hand2 == 0) ||
-                  (hand1 == 1 && hand2 == 4) ||
-                  (hand1 == 2 && hand2 == 1) ||
-                  (hand1 == 2 && hand2 == 4) ||
-                  (hand1 == 3 && hand2 == 0) ||
-                  (hand1 == 3 && hand2 == 1) ||
-                  (hand1 == 3 && hand2 == 2) ||
-                  (hand1 == 4 && hand2 == 3) {
+                  (hand1 == 2 && hand2 == 1) {
             "Player 1 wins!".into()
         } else {
             "Player 2 wins!".into()
